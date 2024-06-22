@@ -1,0 +1,66 @@
+{% extends 'core/index.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .flatpickr-input{
+    width: 40vw;
+}
+
+.calendars{
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+}
+.a{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+</style>
+<h4 class="text-center mt-4">BEJ KERKIMIN NE BAZE TE DATAVE</h4>
+    
+<form method="POST" action="{% url 'available_cars' %}">
+    {% csrf_token %}
+    <div class="calendars">
+        <div class="d-block">
+            <label for="from_date">NGA DATA:</label>
+            <input type="date" id="from_date" name="from_date" class="flatpickr-input" required>
+        </div>
+        
+        <div class="d-block">
+        <label for="to_date">NE DATE:</label>
+        <input type="date" id="to_date" name="to_date" class="flatpickr-input " required></div>
+    </div>
+    <br>
+    <div class="a">
+    <button type="submit" class="btn custom-login ">KERKO MAKINAT</button></div>
+</form>
+
+{% if available_cars %}
+<h5 class="mt-4">Makinat e disponueshme per datat e mesiperme:</h5>
+<ul>
+    {% for car in available_cars %}
+        <li>{{ car.name }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="mt-4">Per datat e zgjedhura nuk ke makina te lira.</p>
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        flatpickr('.flatpickr-input', {
+            dateFormat: 'Y-m-d',  // Format to send to the server
+            altInput: true,       // Enables the display of an alternative input
+            altFormat: 'd-m-Y',      
+            enableTime: false,
+            // disable: disableDates,
+            minDate: "today",
+            "locale": {
+        "firstDayOfWeek": 1 // start week on Monday
+    }
+        });
+    });
+</script>
+{% endblock %}

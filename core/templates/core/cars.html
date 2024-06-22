@@ -1,0 +1,45 @@
+{% extends 'core/index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="custom-buttons">
+    <a href="#" class="btn back-button custom-length ml-2" onclick="history.back()">BACK</a></div>
+    <div class="text-center" style="font-size: 24px;"><strong>MAKINAT NE SISTEM</strong></div> <br>
+    <div class="grid-container ">
+        
+        {% for car in cars %}
+        <div class="grid-item car custom-shadow">{{ car.name }}</div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px; /* Adjust the gap between grid items as needed */
+    }
+
+    .grid-header {
+        grid-column: span 6;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .grid-item {
+        background-color: #f8f9fa; 
+        padding: 10px;
+        text-align: center;
+        border-radius: 6px;
+    }
+
+    .car:hover {
+        background-color: #5161ce;     
+        color: #dee2e6;
+        border: none;
+        
+    }    
+</style>
+
+{% endblock %}

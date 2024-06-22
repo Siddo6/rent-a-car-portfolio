@@ -1,0 +1,124 @@
+{% extends 'core/index.html' %}
+{% load static %}
+{% block content %}
+<style>
+     .custom-table {
+            width: 100%;
+            table-layout: fixed; /* Ensures equal column width */
+        }
+
+        .custom-table th, .custom-table td {
+            width: 25%; /* Equal width for each column */
+            overflow-wrap: break-word; /* Wrap long words and overflow */
+        }
+</style>
+<div class="container mt-5" >
+    <div class="custom-buttons">
+        <button id="resetFiltersButton" class="btn custom-secondary custom-length" onclick="resetFilters()">RESET FILTERS</button>
+        <a href="#" class="btn back-button custom-length ml-2" onclick="history.back()">BACK</a>
+    </div>
+    <h2 class="text-center mb-4">LISTA E REZERVIMEVE PER MUAJIN AKTUAL</h2>
+    <table class="table table-striped table-bordered table-hover custom-shadow custom-table " id="monthly_report">
+        <thead >
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>INSERUAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <td><a href="{% url 'reservation_detail' reservation.pk %}" class="detail-link">{{ reservation.car.name }}</a></td>
+                <td>{{ reservation.from_date|date:"d-m-Y"  }}</td>
+                <td>{{ reservation.to_date|date:"d-m-Y" }}</td>
+                <td>{{ reservation.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    const resetFilters = function() {
+     const table = document.getElementById('monthly_report');
+     const columnsToReset = ['MAKINA', 'NGA DATA', 'DERI NE'];
+
+     // Clear filters for specified columns
+     columnsToReset.forEach(headerText => {
+         // Find the select element within the corresponding th header
+         const thElement = Array.from(table.querySelectorAll('thead th')).find(th => th.textContent.trim() === headerText);
+         if (thElement) {
+             const select = thElement.querySelector('select');
+             if (select) {
+                 select.value = '';
+             }
+         }
+     });
+
+     // Show all rows
+     table.querySelectorAll('tbody tr').forEach(row => {
+         row.style.display = 'table-row';
+     });
+ };
+
+ document.addEventListener('DOMContentLoaded', function () {
+     const table = document.getElementById('monthly_report');
+     const columns = ['MAKINA', 'NGA DATA', 'DERI NE'];
+     const filters = {};
+
+     // Function to create dropdown for a specific column
+     function createDropdown(columnIndex, headerText) {
+         const columnValues = new Set();
+
+         // Get unique values from the column cells
+         table.querySelectorAll(`tbody td:nth-child(${columnIndex + 1})`).forEach(cell => {
+             columnValues.add(cell.textContent.trim());
+         });
+
+         // Create select dropdown for the column
+         const select = document.createElement('select');
+         const defaultOption = document.createElement('option');
+         defaultOption.value = '';
+         defaultOption.textContent = headerText;
+         select.appendChild(defaultOption);
+
+         columnValues.forEach(value => {
+             const option = document.createElement('option');
+             option.value = value;
+             option.textContent = value;
+             select.appendChild(option);
+         });
+
+         // Add event listener to filter rows based on the selected value
+         select.addEventListener('change', function () {
+             filters[headerText] = this.value;
+             filterTable();
+         });
+
+         // Add select dropdown to the header of the column
+         const header = table.querySelector(`thead th:nth-child(${columnIndex + 1})`);
+         header.appendChild(select);
+     }
+
+     // Function to filter table rows based on current filters
+     function filterTable() {
+         table.querySelectorAll('tbody tr').forEach(row => {
+             let displayRow = true;
+             columns.forEach(headerText => {
+                 const selectedValue = filters[headerText];
+                 if (selectedValue && row.querySelector(`td:nth-child(${columns.indexOf(headerText) + 1})`).textContent.trim() !== selectedValue) {
+                     displayRow = false;
+                 }
+             });
+             row.style.display = displayRow ? 'table-row' : 'none';
+         });
+     }
+
+     // Create dropdowns for the columns
+     columns.forEach((headerText, columnIndex) => {
+         createDropdown(columnIndex, headerText);
+     });
+ });
+</script>
+{% endblock %}

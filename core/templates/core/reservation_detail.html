@@ -1,0 +1,22 @@
+{% extends 'core/index.html' %}
+{% load static %}
+{% block content %}
+<div class="container text-center mt-4 custom-shadow custom-container">
+    <h4 class="center-heading">DETAJE PER REZERVIMIN</h4>
+        <ul class="text-center no-bullets">
+            <li>ID:<strong>{{ reservation.pk }}</strong> </li>
+            <li>MAKINA:<strong>{{ reservation.car }}</strong> </li>
+            <li>NGA DATA: <strong>{{ reservation.from_date|date:"d-m-Y" }}</strong>  DERI NE : <strong>{{ reservation.to_date|date:"d-m-Y" }}</strong></li>
+            <li>SHENIME:<strong> {{ reservation.note }}</strong></li>
+            <li>INSERUAR NE SISTEM NE DATEN<strong> {{ reservation.created_at|date:"d-m-Y" }}</strong></li>
+            <!-- Add more details as needed -->
+        </ul>
+        <div class="inline-buttons">
+            <a href="{% url 'reservation_edit' reservation.pk %}" class="btn custom-length modify">MODIFIKO</a>
+            <form action="{% url 'reservation_delete' reservation.pk %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn custom-length delete" onclick="return confirm('Are you sure you want to delete this reservation?')">FSHI</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

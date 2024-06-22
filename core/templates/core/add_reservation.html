@@ -1,0 +1,67 @@
+{% extends 'core/index.html' %}
+{% load static %}
+{% block content %}
+<div class="custom-buttons">
+    <a href="#" class="btn back-button custom-length mx-4 mt-4" onclick="history.back()">BACK</a></div>
+<div class="container mt-5 custom-shadow form-width">
+    
+    {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+<form method="post" action="{% url 'add_reservation' %}">
+    {% csrf_token %}
+    
+    <div class="form-group ">
+        <label for="car">Car</label>
+        <select id="car" name="car" class="form-control" required>
+            <option value="">Select a car</option>  
+            {% for car in form.fields.car.queryset %}
+                <option value="{{ car.id }}">{{ car.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="from_date">From Date</label>
+        <input type="text" id="from_date" name="from_date" placeholder="Select a Date" class="form-control flatpickr-input" required />
+    </div>
+    <div class="form-group">
+        <label for="to_date">To Date</label>
+        <input type="text" id="to_date" name="to_date" placeholder="Select a Date" class="form-control flatpickr-input" required />
+    </div>
+    <div class="form-group">
+        <label for="note">Note</label>
+        <textarea id="note" name="note" class="form-control"></textarea>
+    </div>
+    <div class="btn-container"><button type="submit" class="btn custom-btn">SUBMIT</button></div>
+</form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        
+        flatpickr('.flatpickr-input', {
+            dateFormat: 'Y-m-d',  // Format to send to the server
+            altInput: true,       // Enables the display of an alternative input
+            altFormat: 'd-m-Y',      
+            enableTime: false,
+            // disable: disableDates,
+            minDate: "today",
+            "locale": {
+        "firstDayOfWeek": 1 // start week on Monday
+    }
+        });
+    });
+</script>
+{% endblock %}
