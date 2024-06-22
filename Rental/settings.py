@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-
+from dotenv import load_dotenv
 import dj_database_url
 
 
@@ -78,7 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Rental.wsgi.application'
 
-
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
