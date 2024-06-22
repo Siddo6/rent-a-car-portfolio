@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
+
 
 
 
@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-ze*9*ty#^2n9b+7kjswryunw(@=fft^4pxsok0k-i7b8it%nl8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['easy-auto-rental.onrender.com', 'http://127.0.0.1:8000/']
+ALLOWED_HOSTS = ['easy-auto-rental.onrender.com', '127.0.0.1']
 
 
 # Application definition
