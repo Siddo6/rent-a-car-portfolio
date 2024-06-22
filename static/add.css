@@ -1,0 +1,157 @@
+.flatpickr-day.today{
+        color: #dadada;
+        background-color: #5162ce;
+    }
+
+.flatpickr-day:hover {
+    background-color: #5162ce9e;
+    color: #f7f2f2;
+}
+
+.flatpickr-month {
+    background-color: #5162ce9e;
+}
+
+
+/* ///////////////////////////////////////////////////// */
+
+.custom-table {
+    color: #5162ce;
+}
+
+.custom-row{
+    background-color: #5162ce;
+}
+
+.table-striped {
+    background-color: #5162ce; /* Your desired background color */
+}
+
+.custom-btn{
+    background-color: #5162ce;
+    color: aliceblue;
+    margin-top: 8px;
+}
+.custom-btn2{
+    background-color: #5162ce;
+    color: aliceblue;
+}
+
+.custom-shadow{
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+
+.btn-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-width {
+    width: 80vw;
+    padding: 24px 48px;
+}
+
+.custom-logout, .custom-login {
+    background-color: #5162ce;
+    color: aliceblue;
+    margin-top: 8px;
+    width: fit-content;
+    padding: 8px 24px;
+}
+
+.custom-login:hover {
+    color: #5162ce;
+    font-weight: 800;
+}
+
+.custom-logout:hover {
+    color: #5162ce;
+    font-weight: 800;
+}
+.custom-btn2:hover {
+    color: #5162ce;
+    font-weight: 800;
+}
+
+.login-text{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.no-bullets {
+    list-style-type: none;
+    padding-left: 0; /* Optional: Remove default left padding */
+}
+
+
+.custom-container {
+    width: 50vw;
+    display: grid;
+    place-self: center;
+    padding: 24px 48px;
+}
+
+.detail-link {
+    text-decoration: none;
+    color:  #333333;
+}
+
+.custom-length{
+    width: 150px;
+}
+
+.modify{
+    background-color:#3c4ab4;
+    color: aliceblue;
+}
+.modify:hover{
+    color:#3c4ab4;
+    font-weight: 800;
+}
+.delete{
+    background-color: #b43131;
+    color: aliceblue;
+}
+.delete:hover{
+    color:#b43131;
+    font-weight: 800;
+}
+
+.custom-buttons{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 10px;
+    width: 100%;
+}
+
+
+.custom-secondary{
+    background-color: #777586;    
+    color: aliceblue;
+}
+
+.custom-secondary:hover{
+    background-color: none;    
+    color: #777586;  
+    font-weight: 800;  
+}
+
+.back-button {
+    background-color: #006D96;
+    color: aliceblue;
+}
+.back-button:hover {
+    background-color: aliceblue;
+    color: #006D96;
+    font-weight: 800;  
+}
+
+

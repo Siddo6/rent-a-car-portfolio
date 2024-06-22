@@ -1,69 +1,22 @@
-# Python-related ignores
+# Ignore compiled files
 *.pyc
-*.pyo
-*.pyd
 *.class
-__pycache__/
-*.py[cod]
-*$py.class
 
-# Virtual environment directories
+# Ignore virtual environment directories
 venv/
 env/
 
-# Cache files
+# Ignore cache files
+__pycache__/
 .cache/
 
-# IDE and editor-specific files
-.vscode/
-
-# Django stuff
-*.log
-*.pot
+# Ignore database files
 *.db
-*.sqlite3
 
-# Django migrations
-*/migrations/*
+*.pyc
+# Ignore sensitive or environment-specific information
+config.ini
+secrets.json
 
-# Static files
-staticfiles/
-
-# Ignore everything in static and media directories
-static/*
-media/*
-
-# Except images
-!static/images/
-!static/images/**
-!media/images/
-!media/images/**
-
-# Local environment settings
-.env
-
-# Dependency directories
-node_modules/
-bower_components/
-
-# WhiteNoise cache files
-*.whitenoise-cache
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Packages
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
+# Ignore IDE and editor-specific files
+.vscode/
