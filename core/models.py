@@ -38,8 +38,8 @@ class reservation (models.Model):
         # Check if the reservation overlaps with existing reservations for the same car
         overlapping_reservations = reservation.objects.filter(
             car=self.car,
-            from_date__lte=self.to_date,
-            to_date__gte=self.from_date
+            from_date__lt=self.to_date,
+            to_date__gt=self.from_date
         ).exclude(pk=self.pk if self else None)  # Exclude current instance if updating
 
         if self and self.pk:
