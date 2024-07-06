@@ -20,3 +20,4 @@ secrets.json
 
 # Ignore IDE and editor-specific files
 .vscode/
+.env
