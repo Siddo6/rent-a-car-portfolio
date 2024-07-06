@@ -14,13 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import dj_database_url
-import environ
 
-# Initialize environ
-env = environ.Env()
-
-# Reading .env file
-environ.Env.read_env()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -34,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ze*9*ty#^2n9b+7kjswryunw(@=fft^4pxsok0k-i7b8it%nl8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', default=False)
+DEBUG = False
 
 ALLOWED_HOSTS = ['easy-auto-rental.onrender.com', '127.0.0.1']
 
