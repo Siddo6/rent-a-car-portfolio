@@ -2,15 +2,34 @@
 {% load static %}
 {% block content %}
 <style>
-     .custom-table {
+    .custom-table {
             width: 100%;
             table-layout: fixed; /* Ensures equal column width */
         }
 
-        .custom-table th, .custom-table td {
+    .custom-table th, .custom-table td {
             width: 25%; /* Equal width for each column */
             overflow-wrap: break-word; /* Wrap long words and overflow */
         }
+
+    .custom-table select {
+        width: 100%; /* Ensure the select element takes the full width of the cell */
+    }
+
+    @media (max-width: 600px) {
+        .container{
+            font-size: 14px;
+        }
+
+        .custom-table select {
+            font-size: 12px; /* Smaller font size for dropdowns */
+            padding: 2px 4px; /* Smaller padding for dropdowns */
+        }
+
+        th{
+            font-size: 12px;
+        }
+    }
 </style>
 <div class="container mt-5" >
      <!-- Reset Filters Button -->
