@@ -16,9 +16,9 @@
         <ul class="text-center no-bullets">
             <li>ID:<strong>{{ reservation.pk }}</strong> </li>
             <li>MAKINA:<strong>{{ reservation.car }}</strong> </li>
-            <li>NGA DATA: <strong>{{ reservation.from_date|date:"d-m-Y" }}</strong>  DERI NE : <strong>{{ reservation.to_date|date:"d-m-Y" }}</strong></li>
+            <li>NGA DATA: <br><strong>{{ reservation.from_date|date:"d-m-Y" }}</strong> <br> DERI NE : <br><strong>{{ reservation.to_date|date:"d-m-Y" }}</strong></li>
             <li>SHENIME:<strong> {{ reservation.note }}</strong></li>
-            <li>INSERUAR NE SISTEM NE DATEN<strong> {{ reservation.created_at|date:"d-m-Y" }}</strong></li>
+            <li>INSERUAR NE SISTEM NE DATEN <br><strong> {{ reservation.created_at|date:"d-m-Y" }}</strong></li>
             <!-- Add more details as needed -->
         </ul>
         <div class="inline-buttons">
