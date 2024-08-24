@@ -26,6 +26,9 @@
         <ul class="navbar-nav ml-auto">
             <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
             <li class="nav-item">
+                <a class="nav-link" href="{% url 'daily_report' %}"><i class="fas fa-calendar-day"></i> RAPORT DITOR</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'available_cars' %}"><i class="fas fa-search"></i> SEARCH</a>
             </li>
             <li class="nav-item">
@@ -54,7 +57,7 @@
             </div>
         </div>
     {% else %}
-        <h2 class="text-center mt-4">Hola, Rei!</h2>
+        <h2 class="text-center mt-4">Hola!</h2>
         <p class=" login-text mt-4">Taksirat bej cik login<a href="{% url 'login' %}" class="btn custom-logout">KETU</a> </p>
     {% endif %}
 {% endblock %}

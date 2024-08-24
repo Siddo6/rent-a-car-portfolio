@@ -3,7 +3,8 @@ from .forms import ReservationForm
 from .models import Car, reservation
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.timezone import now
-from datetime import datetime
+from datetime import datetime, timedelta
+
 current_time = now()
 current_month = current_time.month
 current_year = current_time.year
@@ -49,12 +50,11 @@ def cars(request):
     return render(request, 'core/cars.html', {'cars': cars})
 
 
-def get_booked_dates(car_id):
-    booked_dates = reservation.objects.filter(
-        car_id=car_id
-    ).values_list('from_date', 'to_date')
-    return list(booked_dates)
-
+def get_booked_dates(request, car_id):
+    car = get_object_or_404(Car, id=car_id)
+    booked_dates = reservation.objects.filter(car=car)
+    return render(request, 'core/get_booked_dates.html', {'car': car, 'booked_dates':booked_dates})
+    
 
 #EDIT VIEW
 @user_passes_test(lambda u: u.is_superuser)
@@ -88,9 +88,9 @@ def reservation_detail_view(request, pk):
     return render(request, 'core/reservation_detail.html', {'reservation': reservation_instance})
 
 
-
+@user_passes_test(lambda u: u.is_superuser)
 def available_cars(request):
-    available_cars = Car.objects.none()  # Initialize with an empty queryset
+    available_cars = Car.objects.none()  
     
     if request.method == 'POST':
         from_date = request.POST.get('from_date')
@@ -102,10 +102,31 @@ def available_cars(request):
         
         # Query available cars
         booked_cars = reservation.objects.filter(
-            from_date__lte=to_date,
-            to_date__gte=from_date
+            from_date__lt=to_date,
+            to_date__gt=from_date
         ).values_list('car_id', flat=True)
         
         available_cars = Car.objects.exclude(id__in=booked_cars)
     
     return render(request, 'core/select_dates.html', {'available_cars': available_cars})
+
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def daily_report(request):
+        today = now().date()  # Get today's date
+        tomorrow = today + timedelta(days=1)  # Calculate tomorrow's date
+        to_send = reservation.objects.filter(
+            from_date=tomorrow
+        )
+        to_get=reservation.objects.filter(
+            to_date=tomorrow
+        )
+        # Filter reservations where the from_date or to_date is tomorrow
+
+
+        return render(request, 'core/daily_report.html', {
+            'to_send': to_send,
+            'to_get':to_get,
+            'tomorrow': tomorrow
+        })

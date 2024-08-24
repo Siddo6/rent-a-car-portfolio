@@ -35,10 +35,10 @@
      <!-- Reset Filters Button -->
      <div class="custom-buttons">
         <button id="resetFiltersButton" class="btn custom-secondary custom-length" onclick="resetFilters()">RESET FILTERS</button>
-        <a href="{% url 'reservation_list_current_month' current_year=current_year current_month=current_month %}" class="btn custom-btn2 custom-length">MUAJI AKTUAL</a>
+       
         <a href="#" class="btn back-button custom-length ml-2" onclick="history.back()">BACK</a>
     </div>
-    <h2 class="text-center mb-4">TE GJITHA REZERVIMET</h2>
+    <h2 class="text-center mb-4">TE GJITHA REZERVIMET PER {{ car.name }}</h2>
     <table class="table table-striped table-bordered table-hover custom-shadow custom-table " id="monthly_report">
         <thead >
             <tr>
@@ -48,11 +48,11 @@
             </tr>
         </thead>
         <tbody>
-            {% for reservation in reservations %}
+            {% for booking in booked_dates %}
             <tr>
-                <td><a href="{% url 'reservation_detail' reservation.pk %}" class="detail-link">{{ reservation.car.name }}</a></td>
-                <td>{{ reservation.from_date|date:"d-m-Y"  }}</td>
-                <td>{{ reservation.to_date|date:"d-m-Y" }}</td>
+                <td><a href="{% url 'reservation_detail' booking.pk %}" class="detail-link">{{ booking.car.name }}</a></td>
+                <td>{{ booking.from_date|date:"d-m-Y"  }}</td>
+                <td>{{ booking.to_date|date:"d-m-Y" }}</td>
                 
             </tr>
             {% endfor %}

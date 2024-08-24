@@ -1,4 +1,4 @@
-from django.db import models, transaction
+from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.html import format_html
 # Create your models here.
@@ -9,20 +9,7 @@ class Car(models.Model):
     def __str__(self):
         return self.name
       
-    def delete(self, *args, **kwargs):
-        # Get or create the "deleted" placeholder car
-        deleted_car = get_deleted_car_name(self.name)
-        with transaction.atomic():
-            # Update all related reservations to reference the "deleted" car
-            reservation.objects.filter(car=self).update(car=deleted_car)
-            # Call the original delete method
-            super().delete(*args, **kwargs)
 
-def get_deleted_car_name(original_name):
-    # Create or get a car with the name indicating it's deleted
-    deleted_car_name = f"{original_name} - Deleted"
-    car, created = Car.objects.get_or_create(name=deleted_car_name)
-    return car
 
 class reservation (models.Model):
   car = models.ForeignKey(Car, on_delete=models.CASCADE)
@@ -70,4 +57,4 @@ class reservation (models.Model):
   class Meta:
         # Optionally, you can define unique_together here as well for database-level enforcement
         unique_together = ('car', 'from_date', 'to_date')
-        ordering = ['-created_at']
+        ordering = ['-from_date']

@@ -1,0 +1,87 @@
+{% extends 'core/index.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .custom-table {
+            width: 100%;
+            table-layout: fixed; /* Ensures equal column width */
+        }
+
+    .custom-table th, .custom-table td {
+            width: 25%; /* Equal width for each column */
+            overflow-wrap: break-word; /* Wrap long words and overflow */
+        }
+
+    .custom-table select {
+        width: 100%; /* Ensure the select element takes the full width of the cell */
+    }
+
+    @media (max-width: 600px) {
+        .container{
+            font-size: 14px;
+        }
+
+        .custom-table select {
+            font-size: 12px; /* Smaller font size for dropdowns */
+            padding: 2px 4px; /* Smaller padding for dropdowns */
+        }
+
+        th{
+            font-size: 12px;
+        }
+    }
+</style>
+<div class="container mt-5" >
+     
+    <h2 class="text-center mb-4">PERMBLEDHJE PER DITEN E NESERME <br> {{tomorrow|date:"d-m-Y"}}</h2><br>
+    <div class="text-center"><strong>MAKINA PER TI DOREZUAR KLIENTIT</strong></div><br>
+    {% if to_send %}
+    <table class="table table-striped table-bordered table-hover custom-shadow custom-table " id="monthly_report">
+        <thead >
+            <tr>
+                <th>MAKINA</th>
+                <th>NGA DATA</th>
+                <th>DERI NE</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+                {% for booking in to_send %}
+                <tr>
+                    <td><a href="{% url 'reservation_detail' booking.pk %}" class="detail-link">{{ booking.car.name }}</a></td>
+                    <td>{{ booking.from_date|date:"d-m-Y"  }}</td>
+                    <td>{{ booking.to_date|date:"d-m-Y" }}</td>
+                </tr>
+                {% endfor %}
+        </tbody>
+            {% else %}
+                <p class="text-center">Nuk ke makina per te dorezuar neser</p>
+            {% endif %}
+    </table>
+<br>
+    <div class="text-center"><strong>MAKINA PER TE MARRE NGA KLIENTET</strong></div><br>
+    {% if to_get %}
+    <table class="table table-striped table-bordered table-hover custom-shadow custom-table " id="monthly_report">
+        <thead >
+            <tr>
+                <th>MAKINA</th>
+                <th>NGA DATA</th>
+                <th>DERI NE</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+                {% for booking in to_get %}
+                <tr>
+                    <td><a href="{% url 'reservation_detail' booking.pk %}" class="detail-link">{{ booking.car.name }}</a></td>
+                    <td>{{ booking.from_date|date:"d-m-Y"  }}</td>
+                    <td>{{ booking.to_date|date:"d-m-Y" }}</td>
+                </tr>
+                {% endfor %}
+        </tbody>
+            {% else %}
+                <p class="text-center">Nuk ke makina per te marre neser</p>
+            {% endif %}
+    </table>
+
+{% endblock %}

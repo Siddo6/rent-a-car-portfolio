@@ -24,7 +24,6 @@
                 <th></th>
                 <th></th>
                 <th></th>
-                <th>INSERUAR</th>
             </tr>
         </thead>
         <tbody>
@@ -33,7 +32,6 @@
                 <td><a href="{% url 'reservation_detail' reservation.pk %}" class="detail-link">{{ reservation.car.name }}</a></td>
                 <td>{{ reservation.from_date|date:"d-m-Y"  }}</td>
                 <td>{{ reservation.to_date|date:"d-m-Y" }}</td>
-                <td>{{ reservation.created_at }}</td>
             </tr>
             {% endfor %}
         </tbody>
