@@ -13,13 +13,10 @@ def user_login (request):
                                  username=cd['username'],
                                  password=cd['password'])
             if user is not None:
-                if user.is_superuser:
-                        login(request, user)
-                        return redirect('index')  
-                else:
-                        return HttpResponse('Only authorized accounts can log in.')
+                    login(request, user)
+                    return redirect('index')  
             else:
-                return HttpResponse('Account disabled')
+                return HttpResponse('Your credentials are not correct')
             
     else:
             form= LoginForm()
