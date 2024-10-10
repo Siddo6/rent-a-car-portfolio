@@ -1,0 +1,58 @@
+Car Rental App
+
+### Overview
+This Car Rental App allows renters to manage their fleet of cars and handle reservations efficiently. 
+The app focuses on the administration side, where the renter can add cars, update their availability, 
+and manage reservations. The app is designed for internal use by the car rental company's administrative team.
+
+### Features
+- Manage Cars: Add, update, and remove cars from the fleet.
+- Reservations: Book reservations for customers, update, and cancel bookings.
+- Car Availability: Track which cars are available for reservation and which are currently booked.
+
+
+### Tech Stack
+- Backend: Django (Python)
+- Frontend: HTML, CSS, JavaScript
+- Database: PostgreSQL (for production) or SQLite (for development).
+
+### Installation
+#### Prerequisites:
+- Python 3.x
+- Django
+- Git
+#### Steps:
+1. Clone the repository:
+    git clone https://github.com/Siddo6/rent-a-car-portfolio.git
+    cd rent-a-car-portfolio
+
+2. Create and activate a virtual environment:
+    python -m venv venv
+    source venv/bin/activate   # For Linux/macOS
+    venv\Scripts\activate      # For Windows
+
+3. Install dependencies:
+    pip install -r requirements.txt
+
+4. Apply migrations to set up the database:
+    python manage.py migrate
+
+5. Create a superuser for accessing the admin panel:
+    python manage.py createsuperuser 
+**Note**: Creating a superuser is essential since the app does not have a registration option for general users.
+
+6. Run the development server:
+    python manage.py runserver
+
+7. Access the app at http://127.0.0.1:8000/.
+
+### Future Enhancements
+- User Login: Add user authentication to allow customers to make reservations directly.
+- Reservation Calendar: Display reservations in a calendar view for easier management.
+- Payment Integration: Implement online payments for reservations.
+
+### Contributing
+Feel free to contribute by creating issues or submitting pull requests. Make sure to follow the standard guidelines and use feature branches for new functionality.
+
+### License
+This project is licensed under the MIT License. See the LICENSE file for details.
